@@ -1,5 +1,5 @@
 {
-  "generated_at": 1766949524.8761272,
+  "generated_at": 1766951910.199681,
   "data_sources": [
     {
       "name": "subjective_gmail_datasource",
@@ -8,7 +8,8 @@
       "class_name": "SubjectiveGmailDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><rect width=\"24\" height=\"24\" rx=\"4\" fill=\"#EA4335\"/><path fill=\"#fff\" d=\"M6 8l6 4 6-4v8H6z\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Gmail DataSource for BrainBoost\n\nA powerful Gmail integration that converts your email messages into BrainBoost context files for AI processing and analysis.\n\n## \ud83d\ude80 Features\n\n### Email Processing\n- **Multiple Filter Options**: Unread messages, all messages, specific folders, date ranges, or search queries\n- **Context File Generation**: Converts emails to structured JSON format for BrainBoost\n- **Smart Resume**: Automatically resumes interrupted processing sessions\n- **Progress Tracking**: Visual progress bars for large email processing jobs\n\n### Account Management\n- **Multi-Account Support**: Each datasource instance manages one Gmail account\n- **Embedded Authentication**: Secure OAuth credentials built-in (no external files needed)\n- **Easy Setup**: Simple email address input with automated OAuth flow\n\n### Advanced Options\n- **Flexible Filtering**: \n  - Unread messages only\n  - All messages with optional limits\n  - Recent messages (last N days)\n  - Specific Gmail folders/labels\n  - Custom search queries\n- **Batch Processing**: Handle thousands of emails efficiently\n- **Duplicate Prevention**: Skips already processed messages\n- **Error Recovery**: Continues processing even if individual emails fail\n\n## \ud83d\udccb Requirements\n\n```bash\npip install -r requirements.txt\n```\n\nKey dependencies:\n- Google API packages (gmail, auth, oauth)\n- Cryptography for secure credential storage\n- BrainBoost core packages\n- Optional: alive-progress for visual progress bars\n\n## \ud83d\udee0\ufe0f Quick Start\n\n### 1. Setup Virtual Environment\n```bash\npython3 -m venv myenv\nsource myenv/bin/activate\npip install -r requirements.txt\n```\n\n### 2. Configure Account\n```bash\n# Interactive setup\npython gmail_receive.py --add-more-accounts\n\n# Or add account directly\npython gmail_receive.py --add-account work user@gmail.com \"Work email\"\n```\n\n### 3. Process Emails\n```bash\n# Convert unread emails to context files\npython gmail_receive.py --use-account work --unread --create-context\n\n# Convert all emails (with progress bar)\npython gmail_receive.py --use-account work --all --create-context --progress\n\n# Convert recent emails (last 7 days)\npython gmail_receive.py --use-account work --recent 7 --create-context\n```\n\n## \ud83d\udcca Usage Examples\n\n### Basic Operations\n```bash\n# List configured accounts\npython gmail_receive.py --list-accounts\n\n# Test account connection\npython gmail_receive.py --test-account work\n\n# View unread messages (no context files)\npython gmail_receive.py --use-account work --unread\n```\n\n### Context File Generation\n```bash\n# Unread messages only\npython gmail_receive.py --use-account work --unread --create-context\n\n# All messages with limit\npython gmail_receive.py --use-account work --all --count 100 --create-context\n\n# Specific folder\npython gmail_receive.py --use-account work --folder \"Sent\" --create-context\n\n# Search query\npython gmail_receive.py --use-account work --search \"from:boss@company.com\" --create-context\n```\n\n### Advanced Processing\n```bash\n# Resume interrupted processing\npython gmail_receive.py --use-account work --all --create-context --resume\n\n# Start fresh (ignore previous progress)\npython gmail_receive.py --use-account work --all --create-context --fresh\n\n# Start from specific message number\npython gmail_receive.py --use-account work --all --create-context --start-from=500\n\n# Show progress bar during processing\npython gmail_receive.py --use-account work --all --create-context --progress\n```\n\n## \ud83d\udd27 Configuration\n\n### Connection Parameters\n\nWhen integrating with external systems, the datasource supports these configuration fields:\n\n- **Account Setup**: Gmail address, account name, description\n- **Message Filtering**: Filter type (unread/all/recent/folder/search)\n- **Processing Options**: Context file creation, progress display, resume behavior\n- **Output Settings**: Context directory, message limits\n\n### Security\n\n- **Embedded Credentials**: OAuth client credentials are encrypted and embedded in the code\n- **Token Storage**: User access tokens are securely stored per account\n- **No External Dependencies**: No need for separate credential files\n\n## \ud83d\udcc1 Output Format\n\nGenerated context files follow BrainBoost standards:\n\n```json\n{\n  \"type\": \"gmail\",\n  \"folder\": \"Inbox\",\n  \"video_filename\": \"gmail_work_sender_subject\",\n  \"video_recording_time\": \"2024-01-15T10:30:00\",\n  \"transcription\": \"EMAIL METADATA:\\nFrom: sender@example.com\\n...\",\n  \"gmail_metadata\": {\n    \"account_name\": \"work\",\n    \"message_id\": \"abc123\",\n    \"from\": \"sender@example.com\",\n    \"subject\": \"Important Meeting\",\n    \"attachments\": [...]\n  }\n}\n```\n\n## \ud83c\udfd7\ufe0f Architecture\n\n- **Single Account Per Instance**: Each datasource manages one Gmail account\n- **Multiple Instances**: External system creates separate instances for multiple accounts\n- **Embedded Security**: No external credential files required\n- **Resume Capability**: Handles large email processing jobs efficiently\n\n## \ud83d\udd0d Troubleshooting\n\n### Import Errors\nIf you see \"Import could not be resolved\" errors:\n1. Ensure virtual environment is activated\n2. Set Python interpreter in your editor to `./myenv/bin/python`\n3. Install all requirements: `pip install -r requirements.txt`\n\n### Authentication Issues\n- Use `--test-account accountname` to verify authentication\n- Re-run account setup if OAuth tokens are expired\n- Check that embedded credentials are not corrupted\n\n### Processing Issues\n- Use `--resume` to continue interrupted processing\n- Use `--fresh` to start over and ignore previous state\n- Check context directory permissions for file creation\n\n## \ud83d\udcc4 License\n\nPart of the BrainBoost ecosystem. See main project for licensing details.\n"
     },
     {
       "name": "subjective_youtube_datasource",
@@ -17,7 +18,8 @@
       "class_name": "SubjectiveYouTubeDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# YouTube Data Source for BrainBoost\n\nA comprehensive YouTube content processing system that provides multiple ways to extract, transcribe, and analyze YouTube videos. This project includes both a unified Python class interface and individual processing scripts for different use cases.\n\n## \ud83d\ude80 Features\n\n### \ud83c\udfaf **Complete Feature Coverage**\n- **Single URL Processing**: 9 different processing modes\n- **Batch Processing**: File-based URL lists with resume capability  \n- **Search Integration**: Query-based video discovery and processing\n- **Hardcoded Lists**: Predefined video collections\n- **Utility Functions**: URL cleaning and format conversion\n\n### \ud83d\udd27 **Input Types Supported**\n\n1. **Single YouTube URL** - Individual video processing\n2. **File with YouTube URLs** - Batch processing from text files\n3. **YouTube Search Query** - Search-based video discovery\n4. **Predefined URL List** - Curated collections\n\n### \u2699\ufe0f **Processing Modes Available**\n\n| Mode | Script | Output | Input Types |\n|------|---------|---------|-------------|\n| **Audio Download Only** | `youtube_download_audio.py` | MP3 files | Single URL |\n| **Transcription + Summary (English)** | `youtube_extractor_english.py` | English text + summary | Single URL |\n| **Transcription + Summary (Spanish)** | `youtube_extractor_spanish.py` | Spanish text + summary | Single URL |\n| **Transcription + Summary (Auto Language)** | `youtube_text_extract.py` | Auto-language text + summary | Single URL |\n| **Enhanced Multi-language + Translation** | `youtube_text_extract_improved.py` | Multi-language with translation | Single URL |\n| **BrainBoost Context Files** | `youtube_to_context.py` / `process_youtube_batch.py` | JSON context files | Single URL / Batch |\n| **Body Language Analysis** | `youtube_bodylanguage_extractor.py` | Video analysis + body language report | Single URL |\n| **Real-time Body Language Analysis** | `youtube_bodylanguage_extractor_1.py` | Real-time body language analysis | Single URL |\n| **Search Results Summary** | `youtube_summary.py` | Combined summary of search results | Search Query |\n| **Dual Language Processing** | `youtube_batch_interviews.py` | Both Spanish and English processing | Hardcoded List |\n| **Custom Class Processing** | `SubjectiveYouTubeDataSource.py` | Structured data via Python class | Single URL / Batch |\n\n## \ud83d\udce6 Installation\n\n### Prerequisites\n- Python 3.8+\n- FFmpeg (for audio processing)\n\n### Setup\n\n1. **Clone the repository:**\n```bash\ngit clone https://github.com/Subjective-Technologies/subjective_youtube_datasource.git\ncd subjective_youtube_datasource\n```\n\n2. **Create and activate virtual environment:**\n```bash\npython3 -m venv myenv\nsource myenv/bin/activate  # On Windows: myenv\\Scripts\\activate\n```\n\n3. **Install dependencies:**\n```bash\npip install -r requirements.txt\n```\n\n4. **Install FFmpeg (if not already installed):**\n   - **Ubuntu/Debian:** `sudo apt install ffmpeg`\n   - **macOS:** `brew install ffmpeg`\n   - **Windows:** Download from [https://ffmpeg.org/](https://ffmpeg.org/)\n\n## \ud83c\udfaf Quick Start\n\n### Using the Unified Class Interface\n\n```python\nfrom SubjectiveYouTubeDataSource import SubjectiveYouTubeDataSource\n\n# Initialize the data source\nconfig = {\n    'whisper_model_size': 'base',\n    'max_retries': 3,\n    'audio_quality': '192'\n}\n\nyoutube_source = SubjectiveYouTubeDataSource(config)\n\n# Get the comprehensive connection form\nconnection_data = youtube_source.get_connection_data()\n\n# Process user form data\nform_data = {\n    'input_type': 'single_url',\n    'processing_mode': 'context_generation',\n    'input_data': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',\n    'whisper_model': 'base',\n    'output_options': {\n        'output_format': 'json',\n        'include_metadata': True\n    }\n}\n\nresult = youtube_source.process_connection_form_data(form_data)\nprint(f\"Processing result: {result['success']}\")\n\n# Cleanup\nyoutube_source.cleanup()\n```\n\n### Using Individual Scripts\n\n#### Single Video Processing\n```bash\n# Download audio only\npython3 youtube_download_audio.py \"https://youtube.com/watch?v=VIDEO_ID\"\n\n# Transcribe and summarize (English)\npython3 youtube_extractor_english.py \"https://youtube.com/watch?v=VIDEO_ID\"\n\n# Create BrainBoost context files\npython3 youtube_to_context.py \"https://youtube.com/watch?v=VIDEO_ID\"\n```\n\n#### Batch Processing\n```bash\n# Process multiple URLs from file\npython3 process_youtube_batch.py youtube_urls.txt\n\n# Create context files from URL list\npython3 youtube_to_context.py youtube_urls.txt\n```\n\n#### Search-Based Processing\n```bash\n# Process search results\npython3 youtube_summary.py \"machine learning tutorials\"\n```\n\n## \ud83d\udccb Connection Form Interface\n\nThe `SubjectiveYouTubeDataSource` class provides a comprehensive connection form through the `get_connection_data()` method that covers all available YouTube processing features:\n\n```python\n# Get the connection form configuration\nconnection_data = youtube_source.get_connection_data()\n\n# The form includes:\n# - Input type selection (single URL, batch file, search query, hardcoded list)\n# - Processing mode selection (10+ different modes)\n# - Whisper model configuration\n# - Batch processing options\n# - Search options  \n# - Output format options\n# - Advanced settings (audio quality, retries, rate limiting)\n```\n\nSee `CONNECTION_FORM_DOCUMENTATION.md` for complete details.\n\n## \ud83e\uddea Examples\n\n### Example 1: Basic Usage\n```python\n# Run the example script\npython3 example_connection_form_usage.py\n```\n\n### Example 2: Batch Processing\nCreate a file `youtube_urls.txt` with one URL per line:\n```\nhttps://www.youtube.com/watch?v=dQw4w9WgXcQ\nhttps://www.youtube.com/watch?v=9bZkp7q19f0\nhttps://www.youtube.com/watch?v=kJQP7kiw5Fk\n```\n\nThen process:\n```bash\npython3 process_youtube_batch.py youtube_urls.txt\n```\n\n### Example 3: URL Cleaning\n```bash\n# Clean and validate URLs\npython3 clean_youtube_links.py youtube_urls.txt\n\n# Convert live URLs to video URLs  \npython3 convert_live_to_video_urls.py youtube_urls.txt\n```\n\n## \ud83d\udcc1 Project Structure\n\n```\nsubjective_youtube_datasource/\n\u251c\u2500\u2500 SubjectiveYouTubeDataSource.py          # Main unified class interface\n\u251c\u2500\u2500 update_context_txt.py                   # Context file management\n\u251c\u2500\u2500 example_connection_form_usage.py        # Usage examples\n\u251c\u2500\u2500 CONNECTION_FORM_DOCUMENTATION.md        # Complete documentation\n\u251c\u2500\u2500 requirements.txt                        # Python dependencies\n\u251c\u2500\u2500 \n\u251c\u2500\u2500 # Individual processing scripts\n\u251c\u2500\u2500 youtube_download_audio.py               # Audio-only extraction\n\u251c\u2500\u2500 youtube_extractor_english.py            # English transcription\n\u251c\u2500\u2500 youtube_extractor_spanish.py            # Spanish transcription  \n\u251c\u2500\u2500 youtube_text_extract.py                 # Auto-language processing\n\u251c\u2500\u2500 youtube_text_extract_improved.py        # Enhanced multi-language\n\u251c\u2500\u2500 youtube_to_context.py                   # BrainBoost context generation\n\u251c\u2500\u2500 youtube_bodylanguage_extractor.py       # Body language analysis\n\u251c\u2500\u2500 youtube_bodylanguage_extractor_1.py     # Real-time body language\n\u251c\u2500\u2500 youtube_summary.py                      # Search-based summarization\n\u251c\u2500\u2500 youtube_batch_interviews.py             # Hardcoded interview processing\n\u251c\u2500\u2500 \n\u251c\u2500\u2500 # Batch and utility scripts\n\u251c\u2500\u2500 process_youtube_batch.py                # Advanced batch processing\n\u251c\u2500\u2500 clean_youtube_links.py                  # URL validation\n\u2514\u2500\u2500 convert_live_to_video_urls.py           # URL format conversion\n```\n\n## \ud83d\udd27 Configuration\n\n### Whisper Models\n- `tiny`: Fastest, least accurate\n- `base`: Balanced (recommended)\n- `small`: Good accuracy\n- `medium`: Better accuracy  \n- `large`: Best accuracy, slowest\n\n### Audio Quality Options\n- `128`: Lower quality, faster\n- `192`: Balanced (recommended)\n- `256`: Higher quality\n- `320`: Highest quality\n\n## \ud83d\udcca Dependencies\n\n### Core Dependencies\n- `yt-dlp`: YouTube downloading\n- `openai-whisper`: Audio transcription\n- `pydub`: Audio processing\n- `ffmpeg-python`: Audio conversion\n\n### Optional Dependencies  \n- `opencv-python`: Video analysis\n- `mediapipe`: Body language analysis\n- `transformers`: Enhanced NLP\n- `torch`: Machine learning models\n\n### System Dependencies\n- `ffmpeg`: Audio/video processing\n\n## \ud83e\udd1d Contributing\n\n1. Fork the repository\n2. Create a feature branch (`git checkout -b feature/amazing-feature`)\n3. Commit your changes (`git commit -m 'Add amazing feature'`)\n4. Push to the branch (`git push origin feature/amazing-feature`)\n5. Open a Pull Request\n\n## \ud83d\udcc4 License\n\nThis project is licensed under the MIT License - see the LICENSE file for details.\n\n## \ud83d\ude4f Acknowledgments\n\n- [yt-dlp](https://github.com/yt-dlp/yt-dlp) for YouTube downloading capabilities\n- [OpenAI Whisper](https://github.com/openai/whisper) for speech recognition\n- [MediaPipe](https://mediapipe.dev/) for body language analysis\n- [FFmpeg](https://ffmpeg.org/) for audio/video processing\n\n## \ud83d\udcde Support\n\nFor support, please open an issue on GitHub or contact the development team.\n\n---\n\n**Made with \u2764\ufe0f by Subjective Technologies** "
     },
     {
       "name": "subjective_transcribelocalvideo_datasource",
@@ -26,7 +28,8 @@
       "class_name": "SubjectiveTranscribeLocalVideoDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"12\" rx=\"2\" fill=\"#111827\"/><path d=\"M10 8L15 11L10 14V8Z\" fill=\"#fff\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Transcribe Local Video Data Source\n\nA BrainBoost data source for transcribing local video files using OpenAI's Whisper AI. This project converts video files to audio and generates accurate transcriptions stored as JSON context files.\n\n## Features\n\n- \ud83c\udfa5 **Video Processing**: Supports MP4 and MKV video formats\n- \ud83d\udd0a **Audio Extraction**: Automatically extracts and converts audio from video files\n- \ud83e\udd16 **AI Transcription**: Uses OpenAI Whisper for high-quality speech-to-text conversion\n- \ud83d\udcca **Progress Tracking**: Real-time progress updates and status callbacks\n- \ud83d\udd04 **Subscriber Pattern**: Notifies subscribers with transcription data\n- \ud83d\udcc1 **Smart Deduplication**: Avoids re-processing already transcribed videos\n- \u2699\ufe0f **Configurable**: Flexible configuration through parameters or environment variables\n- \ud83d\udd17 **BrainBoost Integration**: Fully compatible with BrainBoost data pipeline system\n\n## Installation\n\n### Prerequisites\n\n- Python 3.8 or higher\n- FFmpeg (for video/audio processing)\n\n#### Install FFmpeg:\n\n**Ubuntu/Debian:**\n```bash\nsudo apt update\nsudo apt install ffmpeg\n```\n\n**macOS:**\n```bash\nbrew install ffmpeg\n```\n\n**Windows:**\nDownload from [ffmpeg.org](https://ffmpeg.org/download.html) or use chocolatey:\n```bash\nchoco install ffmpeg\n```\n\n### Setup\n\n1. **Clone the repository:**\n```bash\ngit clone git@github.com:Subjective-Technologies/subjective_transcribelocalvideo_datasource.git\ncd subjective_transcribelocalvideo_datasource\n```\n\n2. **Create and activate virtual environment:**\n```bash\npython3 -m venv myenv\nsource myenv/bin/activate  # On Windows: myenv\\Scripts\\activate\n```\n\n3. **Install dependencies:**\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\n### As a BrainBoost Data Source\n\n```python\nfrom transcribe_local_video import SubjectiveTranscribeLocalVideoDataSource\n\n# Create the data source\ndata_source = SubjectiveTranscribeLocalVideoDataSource(\n    name=\"VideoTranscription\",\n    params={\n        'videos_dir': '/path/to/videos',\n        'context_dir': '/path/to/context',\n        'whisper_model_size': 'base'\n    }\n)\n\n# Set up callbacks (optional)\ndef progress_callback(name, total, processed, estimated_time):\n    print(f\"{name}: {processed}/{total} files processed, {estimated_time:.1f}s remaining\")\n\ndef status_callback(name, status):\n    print(f\"{name}: {status}\")\n\ndata_source.set_progress_callback(progress_callback)\ndata_source.set_status_callback(status_callback)\n\n# Subscribe to receive transcription data\nclass MySubscriber:\n    def notify(self, data):\n        if data['type'] == 'video_transcription':\n            print(f\"Transcribed: {data['video_filename']}\")\n            print(f\"Transcript: {data['transcript'][:100]}...\")\n\ndata_source.subscribe(MySubscriber())\n\n# Start processing\ndata_source.fetch()\n```\n\n### Command Line Usage (Legacy)\n\n```bash\n# Process all videos in default directory\npython transcribe_local_video.py\n\n# Process specific video file\npython transcribe_local_video.py /path/to/video.mp4\n```\n\n## Configuration\n\n### Parameters\n\n- `videos_dir`: Directory containing video files (default: \"videos\")\n- `context_dir`: Directory for output JSON files (default: \"context\")\n- `whisper_model_size`: Whisper model size - 'tiny', 'base', 'small', 'medium', 'large' (default: 'base')\n- `specific_video_path`: Process a single video file instead of directory\n\n### Environment Variables\n\nYou can also configure using environment variables:\n\n```bash\nexport VIDEOS_DIR=\"/path/to/videos\"\nexport CONTEXT_DIR=\"/path/to/context\"\n```\n\nOr create a `.env` file:\n```\nVIDEOS_DIR=/path/to/videos\nCONTEXT_DIR=/path/to/context\n```\n\n## Output Format\n\nThe transcription data is saved as JSON files with comprehensive metadata:\n\n```json\n{\n  \"video_path\": \"/path/to/video.mp4\",\n  \"video_filename\": \"video.mp4\",\n  \"video_hash\": \"abc123...\",\n  \"video_size\": 1048576,\n  \"video_mtime\": 1704067200.0,\n  \"video_recording_time\": \"2024-01-01T12:00:00\",\n  \"transcription_time\": \"2024-01-08T15:30:00.123456\",\n  \"whisper_model\": \"base\",\n  \"transcription\": \"Hello, this is the transcribed text from the video...\"\n}\n```\n\n## Data Notifications\n\nThe data source sends structured notifications to subscribers:\n\n### Individual Video Transcription\n```json\n{\n  \"type\": \"video_transcription\",\n  \"video_path\": \"/path/to/video.mp4\",\n  \"video_filename\": \"video.mp4\",\n  \"transcript\": \"Transcribed text content...\",\n  \"output_path\": \"/path/to/context/context-20240108120000.json\",\n  \"timestamp\": \"2024-01-08T12:00:00.000000\"\n}\n```\n\n### Processing Summary\n```json\n{\n  \"type\": \"transcription_summary\",\n  \"processed_count\": 5,\n  \"skipped_count\": 2,\n  \"total_files\": 7,\n  \"context_dir\": \"/path/to/context\"\n}\n```\n\n## Whisper Models\n\nChoose the appropriate model size based on your needs:\n\n| Model | Size | Speed | Accuracy |\n|-------|------|-------|----------|\n| tiny  | 39 MB | Fastest | Good |\n| base  | 74 MB | Fast | Better |\n| small | 244 MB | Medium | Good |\n| medium| 769 MB | Slow | Very Good |\n| large | 1550 MB | Slowest | Best |\n\n## Performance\n\n- **GPU Acceleration**: Automatically uses CUDA if available for faster processing\n- **Smart Deduplication**: Skips already processed videos using multiple identification methods\n- **Memory Efficient**: Uses temporary files for audio processing\n- **Progress Tracking**: Real-time progress updates with time estimation\n\n## Dependencies\n\n- `subjective-abstract-data-source-package` - BrainBoost data source framework\n- `openai-whisper` - AI transcription engine\n- `pydub` - Audio processing\n- `ffmpeg-python` - Video/audio conversion\n- `python-dotenv` - Environment configuration\n\n## Contributing\n\n1. Fork the repository\n2. Create a feature branch (`git checkout -b feature/amazing-feature`)\n3. Commit your changes (`git commit -m 'Add some amazing feature'`)\n4. Push to the branch (`git push origin feature/amazing-feature`)\n5. Open a Pull Request\n\n## License\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n\n## Support\n\nFor support and questions:\n- Issues: [GitHub Issues](https://github.com/Subjective-Technologies/subjective_transcribelocalvideo_datasource/issues)\n- Email: support@subjectivetechnologies.com\n\n## Changelog\n\n### 1.0.0\n- Initial release\n- SubjectiveTranscribeLocalVideoDataSource implementation\n- OpenAI Whisper integration\n- Progress tracking and status callbacks\n- BrainBoost data pipeline compatibility "
     },
     {
       "name": "subjective_awscodecommit_datasource",
@@ -35,7 +38,8 @@
       "class_name": "SubjectiveAWSCodeCommitDataSource",
       "icon_svg": "<svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <path fill=\"#252F3E\" d=\"M4.51 7.687c0 .197.02.357.058.475.042.117.096.245.17.384a.233.233 0 01.037.123c0 .053-.032.107-.1.16l-.336.224a.255.255 0 01-.138.048c-.054 0-.107-.026-.16-.074a1.652 1.652 0 01-.192-.251 4.137 4.137 0 01-.165-.315c-.415.491-.936.737-1.564.737-.447 0-.804-.129-1.064-.385-.261-.256-.394-.598-.394-1.025 0-.454.16-.822.484-1.1.325-.278.756-.416 1.304-.416.18 0 .367.016.564.042.197.027.4.07.612.118v-.39c0-.406-.085-.689-.25-.854-.17-.166-.458-.246-.868-.246-.186 0-.377.022-.574.07a4.23 4.23 0 00-.575.181 1.525 1.525 0 01-.186.07.326.326 0 01-.085.016c-.075 0-.112-.054-.112-.166v-.262c0-.085.01-.15.037-.186a.399.399 0 01.15-.113c.185-.096.409-.176.67-.24.26-.07.537-.101.83-.101.633 0 1.096.144 1.394.432.293.288.442.726.442 1.314v1.73h.01zm-2.161.811c.175 0 .356-.032.548-.096.191-.064.362-.182.505-.342a.848.848 0 00.181-.341c.032-.129.054-.283.054-.465V7.03a4.43 4.43 0 00-.49-.09 3.996 3.996 0 00-.5-.033c-.357 0-.618.07-.793.214-.176.144-.26.347-.26.614 0 .25.063.437.196.566.128.133.314.197.559.197zm4.273.577c-.096 0-.16-.016-.202-.054-.043-.032-.08-.106-.112-.208l-1.25-4.127a.938.938 0 01-.049-.214c0-.085.043-.133.128-.133h.522c.1 0 .17.016.207.053.043.032.075.107.107.208l.894 3.535.83-3.535c.026-.106.058-.176.1-.208a.365.365 0 01.214-.053h.425c.102 0 .17.016.213.053.043.032.08.107.101.208l.841 3.578.92-3.578a.458.458 0 01.107-.208.346.346 0 01.208-.053h.495c.085 0 .133.043.133.133 0 .027-.006.054-.01.086a.76.76 0 01-.038.133l-1.283 4.127c-.032.107-.069.177-.111.209a.34.34 0 01-.203.053h-.457c-.101 0-.17-.016-.213-.053-.043-.038-.08-.107-.101-.214L8.213 5.37l-.82 3.439c-.026.107-.058.176-.1.213-.043.038-.118.054-.213.054h-.458zm6.838.144a3.51 3.51 0 01-.82-.096c-.266-.064-.473-.134-.612-.214-.085-.048-.143-.101-.165-.15a.378.378 0 01-.031-.149v-.272c0-.112.042-.166.122-.166a.3.3 0 01.096.016c.032.011.08.032.133.054.18.08.378.144.585.187.213.042.42.064.633.064.336 0 .596-.059.777-.176a.575.575 0 00.277-.508.52.52 0 00-.144-.373c-.095-.102-.276-.193-.537-.278l-.772-.24c-.388-.123-.676-.305-.851-.545a1.275 1.275 0 01-.266-.774c0-.224.048-.422.143-.593.096-.17.224-.32.384-.438.16-.122.34-.213.553-.277.213-.064.436-.091.67-.091.118 0 .24.005.357.021.122.016.234.038.346.06.106.026.208.052.303.085.096.032.17.064.224.096a.46.46 0 01.16.133.289.289 0 01.047.176v.251c0 .112-.042.171-.122.171a.552.552 0 01-.202-.064 2.427 2.427 0 00-1.022-.208c-.303 0-.543.048-.708.15-.165.1-.25.256-.25.475 0 .149.053.277.16.379.106.101.303.202.585.293l.756.24c.383.123.66.294.825.513.165.219.244.47.244.748 0 .23-.047.437-.138.619a1.436 1.436 0 01-.388.47c-.165.133-.362.23-.591.299-.24.075-.49.112-.761.112z\" data-darkreader-inline-fill=\"\" style=\"--darkreader-inline-fill: #1e2632;\"></path> <g fill=\"#F90\" fill-rule=\"evenodd\" clip-rule=\"evenodd\" data-darkreader-inline-fill=\"\" style=\"--darkreader-inline-fill: #cc7a00;\"> <path d=\"M14.465 11.813c-1.75 1.297-4.294 1.986-6.481 1.986-3.065 0-5.827-1.137-7.913-3.027-.165-.15-.016-.353.18-.235 2.257 1.313 5.04 2.109 7.92 2.109 1.941 0 4.075-.406 6.039-1.239.293-.133.543.192.255.406z\"></path> <path d=\"M15.194 10.98c-.223-.287-1.479-.138-2.048-.069-.17.022-.197-.128-.043-.24 1-.705 2.645-.502 2.836-.267.192.24-.053 1.89-.99 2.68-.143.123-.281.06-.218-.1.213-.53.687-1.72.463-2.003z\"></path> </g> </g></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Aws Code Commit Datasource\n\nA Subjective data source for aws code commit.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveAWSCodeCommitDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_azure_devops_datasource",
@@ -44,7 +48,8 @@
       "class_name": "SubjectiveAzureDevOpsDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><rect width=\"24\" height=\"24\" rx=\"4\" fill=\"#0078D7\"/><path fill=\"#fff\" d=\"M6 12l6-6 6 6-6 6z\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Azure Dev Ops Datasource\n\nA Subjective data source for azure dev ops.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveAzureDevOpsDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_bazaar_datasource",
@@ -53,7 +58,8 @@
       "class_name": "SubjectiveBazaarDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><circle cx=\"16\" cy=\"16\" r=\"14\" fill=\"#FCE94F\"/><path fill=\"#856404\" d=\"M10 10h12v2H10zm0 4h10v2H10zm0 4h6v2h-6z\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Bazaar Datasource\n\nA Subjective data source for bazaar.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveBazaarDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_binance_p2p_offers_realtime_datasource",
@@ -62,7 +68,8 @@
       "class_name": "SubjectiveBinanceP2POffersDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\"><circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"#F3BA2F\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Binance P2 P Offers Datasource\n\nA Subjective data source for binance p2 p offers.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveBinanceP2POffersDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_bitbucket_datasource",
@@ -71,7 +78,8 @@
       "class_name": "SubjectiveBitBucketDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><path d=\"M2.91 3h26.18l-3.81 24.94H7.01z\" fill=\"#2684FF\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Bit Bucket Datasource\n\nA Subjective data source for bit bucket.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveBitBucketDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_bybitp2p_datasource",
@@ -80,7 +88,8 @@
       "class_name": "SubjectiveByBitP2PDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 20 20\">\n  <circle cx=\"10\" cy=\"10\" r=\"10\" fill=\"#252F3E\"/>\n</svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# By Bit P2 P Datasource\n\nA Subjective data source for by bit p2 p.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveByBitP2PDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_github_datasource",
@@ -89,7 +98,8 @@
       "class_name": "SubjectiveGitHubDataSource",
       "icon_svg": "<svg xmlns=\\\"http://www.w3.org/2000/svg\\\" viewBox=\\\"0 0 24 24\\\"><path fill=\\\"#000\\\" d=\\\"M12 .5a12 12 0 0 0-3.793 23.39c.6.112.82-.26.82-.58 0-.286-.01-1.044-.016-2.05-3.338.726-4.042-1.61-4.042-1.61-.546-1.386-1.334-1.756-1.334-1.756-1.09-.744.083-.729.083-.729 1.206.084 1.84 1.238 1.84 1.238 1.072 1.836 2.813 1.306 3.498.999.108-.776.42-1.307.763-1.607-2.665-.303-5.466-1.332-5.466-5.93 0-1.31.468-2.381 1.236-3.22-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 6.006 0c2.29-1.552 3.297-1.23 3.297-1.23.655 1.653.243 2.873.12 3.176.77.839 1.235 1.91 1.235 3.22 0 4.61-2.805 5.625-5.478 5.922.431.372.816 1.103.816 2.222 0 1.604-.014 2.896-.014 3.292 0 .322.217.698.827.579A12 12 0 0 0 12 .5Z\\\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Git Hub Datasource\n\nA Subjective data source for git hub.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveGitHubDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_gitlab_datasource",
@@ -98,7 +108,8 @@
       "class_name": "SubjectiveGitLabDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 16 16\"><path fill=\"#FC6D26\" d=\"M14.975 8.904L14.19 6.55l-1.552-4.67a.268.268 0 00-.255-.18.268.268 0 00-.254.18l-1.552 4.667H5.422L3.87 1.879a.267.267 0 00-.254-.179.267.267 0 00-.254.18l-1.55 4.667-.784 2.357a.515.515 0 00.193.583l6.78 4.812 6.778-4.812a.516.516 0 00.196-.583z\"/><path fill=\"#E24329\" d=\"M8 14.296l2.578-7.75H5.423L8 14.296z\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Git Lab Datasource\n\nA Subjective data source for git lab.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveGitLabDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_gitea_datasource",
@@ -107,7 +118,8 @@
       "class_name": "SubjectiveGiteaDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#609926\"/><path fill=\"#fff\" d=\"M6 12h12v2H6z\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Gitea Datasource\n\nA Subjective data source for gitea.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveGiteaDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_gitolite_datasource",
@@ -116,7 +128,8 @@
       "class_name": "SubjectiveGitoliteDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><rect width=\"24\" height=\"24\" fill=\"#E84E31\"/><text x=\"12\" y=\"14\" font-size=\"6\" fill=\"#fff\" text-anchor=\"middle\">GLT</text></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Gitolite Datasource\n\nA Subjective data source for gitolite.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveGitoliteDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_googlecloud_storage_datasource",
@@ -125,7 +138,8 @@
       "class_name": "SubjectiveGoogleCloudSourceDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M12 2L2 12h3v5h14v-5h3L12 2z\" fill=\"#4285F4\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Google Cloud Source Datasource\n\nA Subjective data source for google cloud source.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveGoogleCloudSourceDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_knowledgehook_realtime_datasource",
@@ -134,7 +148,8 @@
       "class_name": "SubjectiveKnowledgeHookRealTimeDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Knowledge Hook Real Time Datasource\n\nA Subjective data source for knowledge hook real time.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveKnowledgeHookRealTimeDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_linkedin_realtime_datasource",
@@ -143,7 +158,8 @@
       "class_name": "SubjectiveLinkedinRealTimeDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 16 16\"><rect width=\"16\" height=\"16\" rx=\"2\" fill=\"#0A66C2\"/><path fill=\"#fff\" d=\"M5.56 12.23H3.78V6.5h1.78v5.73zM4.67 5.72a1.03 1.03 0 1 1 0-2.06 1.03 1.03 0 0 1 0 2.06zM12.22 12.23h-1.78V9.44c0-.66-.01-1.52-.92-1.52-.93 0-1.07.72-1.07 1.47v2.84H6.68V6.5h1.7v.78h.02c.35-.59 1-.95 1.69-.93 1.8 0 2.13 1.19 2.13 2.73v3.15z\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Linkedin Real Time Datasource\n\nA Subjective data source for linkedin real time.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveLinkedinRealTimeDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_localfolder_datasource",
@@ -152,7 +168,8 @@
       "class_name": "SubjectiveLocalFolderDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><rect width=\"24\" height=\"24\" rx=\"4\" fill=\"#f59e0b\"/><path fill=\"#fff\" d=\"M6 7h12v2H6zm0 4h12v2H6zm0 4h8v2H6z\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Local Folder Datasource\n\nA Subjective data source for local folder.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveLocalFolderDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_mercurial_datasource",
@@ -161,7 +178,8 @@
       "class_name": "SubjectiveMercurialDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><rect width=\"24\" height=\"24\" rx=\"4\" fill=\"#1b1b1b\"/><path fill=\"#bfbfbf\" d=\"M5 7h14v2H5zm0 4h12v2H5zm0 4h8v2H5z\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Mercurial Datasource\n\nA Subjective data source for mercurial.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveMercurialDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_perforce_datasource",
@@ -170,7 +188,8 @@
       "class_name": "SubjectivePerforceDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><rect width=\"24\" height=\"24\" fill=\"#0060FF\"/><text x=\"12\" y=\"14\" font-size=\"10\" fill=\"#fff\" text-anchor=\"middle\">P4</text></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Perforce Datasource\n\nA Subjective data source for perforce.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectivePerforceDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_phabricator_datasource",
@@ -179,7 +198,8 @@
       "class_name": "SubjectivePhabricatorDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#4a5f88\"/><path fill=\"#fff\" d=\"M11 7h2v10h-2z\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Phabricator Datasource\n\nA Subjective data source for phabricator.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectivePhabricatorDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_plasticscm_datasource",
@@ -188,7 +208,8 @@
       "class_name": "SubjectivePlasticSCMDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#556677\"/><text x=\"12\" y=\"13\" font-size=\"5\" fill=\"#fff\" text-anchor=\"middle\">PLS</text></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Plastic Scm Datasource\n\nA Subjective data source for plastic scm.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectivePlasticSCMDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_rationalteamconcert_datasource",
@@ -197,7 +218,8 @@
       "class_name": "SubjectiveRationalTeamConcertDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#16335B\"/><text x=\"12\" y=\"13\" font-size=\"6\" fill=\"#fff\" text-anchor=\"middle\">RTC</text></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Rational Team Concert Datasource\n\nA Subjective data source for rational team concert.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveRationalTeamConcertDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_sourceforge_datasource",
@@ -206,7 +228,8 @@
       "class_name": "SubjectiveSourceForgeDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"#ff6600\"/><path fill=\"#fff\" d=\"M11 7h2v10h-2z\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Source Forge Datasource\n\nA Subjective data source for source forge.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveSourceForgeDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_svn_datasource",
@@ -215,7 +238,8 @@
       "class_name": "SubjectiveSVNDataSource",
       "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><rect width=\"24\" height=\"24\" rx=\"4\" fill=\"#4b5563\"/><path fill=\"#fff\" d=\"M5 7h14v2H5zm0 4h14v2H5zm0 4h10v2H5z\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Svn Datasource\n\nA Subjective data source for svn.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveSVNDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_team_foundation_datasource",
@@ -224,7 +248,8 @@
       "class_name": "SubjectiveTeamFoundationDataSource",
       "icon_svg": "<svg viewBox=\\\"0 0 256 256\\\" xmlns=\\\"http://www.w3.org/2000/svg\\\"><rect width=\\\"256\\\" height=\\\"256\\\" rx=\\\"24\\\" fill=\\\"#6C33AF\\\"/><path fill=\\\"#fff\\\" d=\\\"M64 96h128v24H64zm0 40h96v24H64z\\\"/></svg>",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Team Foundation Datasource\n\nA Subjective data source for team foundation.\n\n## Installation\n\n```bash\npip install -r requirements.txt\n```\n\n## Usage\n\nThis data source is designed to be used with the Subjective Technologies platform.\n\n## Class\n\n- `SubjectiveTeamFoundationDataSource`: Main data source implementation\n\n## Requirements\n\nSee `requirements.txt` for dependencies.\n\n## License\n\nMIT License\n"
     },
     {
       "name": "subjective_to_pdf_datasource",
@@ -233,7 +258,8 @@
       "class_name": "SubjectiveToPdfDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveToPdfDataSource\n\nBatch data source for PDF processing and merging - Part of Subjective Technologies Data Source ecosystem.\n\n## Overview\n\nThis data source provides batch extraction and processing of PDF files, including merging multiple PDFs into a single file, compression using Ghostscript, and optional chunking by pages or file size. It's designed to handle large collections of PDF documents efficiently.\n\n## Features\n\n- \ud83d\udcc4 PDF file discovery and validation\n- \ud83d\udd17 Merge multiple PDFs into a single file\n- \ud83d\udddc\ufe0f PDF compression using Ghostscript\n- \u2702\ufe0f PDF chunking by pages or file size\n- \ud83d\udd0d Duplicate detection using SHA256 checksums\n- \ud83d\udcdd Comprehensive logging and processing reports\n- \ud83d\udcbe Flexible storage system integration\n- \ud83d\udd27 Configurable processing parameters\n- \ud83d\udee1\ufe0f Error handling and recovery\n- \ud83d\udc0d Python 3.8+ compatible\n\n## Installation\n\n### Using Conda (Recommended)\n\n```bash\n# Create environment from environment.yml\nconda env create -f environment.yml\n\n# Activate environment\nconda activate to-pdf\n```\n\n### Using Pip\n\n```bash\n# Create virtual environment\npython -m venv venv\nsource venv/bin/activate  # On Windows: venv\\\\Scripts\\\\activate\n\n# Install dependencies\npip install -r requirements.txt\n```\n\n### System Dependencies\n\nFor PDF compression functionality, install Ghostscript:\n\n**Ubuntu/Debian:**\n```bash\nsudo apt-get install ghostscript\n```\n\n**macOS:**\n```bash\nbrew install ghostscript\n```\n\n**Windows:**\nDownload from [Ghostscript website](https://www.ghostscript.com/releases/gsdnld.html)\n\n## Configuration\n\nCreate a `.env` file in the project root with the following variables:\n\n```env\n# Input/Output Configuration\nINPUT_DIRECTORY=./input  # Directory containing PDF files to process\nOUTPUT_DIRECTORY=./output  # Directory for processed files\n\n# Processing Configuration\nENABLE_COMPRESSION=true  # Enable PDF compression (requires Ghostscript)\nCHUNK_CONFIG=3  # Optional: Split into 3 parts by pages\n# CHUNK_CONFIG=50MB  # Optional: Split by file size (50MB chunks)\n```\n\n## Usage\n\n### Direct Execution\n\n```bash\npython SubjectiveToPdfDataSource.py\n```\n\n### Programmatic Usage\n\n```python\nfrom SubjectiveToPdfDataSource import SubjectiveToPdfDataSource\n\n# Configuration\nconfig = {\n    'storage_config': {\n        'type': 'file',\n        'path': './output'\n    },\n    'datasource_config': {\n        'input_directory': './input',  # Directory with PDF files\n        'output_directory': './output',  # Output directory\n        'enable_compression': True,  # Enable compression\n        'chunk_config': '3',  # Split into 3 parts by pages\n        # 'chunk_config': '50MB',  # Or split by file size\n    }\n}\n\n# Create and run data source\ndatasource = SubjectiveToPdfDataSource(config)\n\n# Connect to data source\nif datasource.connect():\n    # Run batch processing\n    success = datasource.run()\n    if success:\n        print(\"PDF processing completed successfully\")\n    else:\n        print(\"PDF processing failed\")\nelse:\n    print(\"Failed to connect to data source\")\n```\n\n## Processing Workflow\n\n1. **Discovery**: Recursively finds all PDF files in the input directory\n2. **Validation**: Checks each PDF for validity and non-zero size\n3. **Deduplication**: Removes duplicate files using SHA256 checksums\n4. **Merging**: Combines all valid PDFs into a single file\n5. **Compression**: Optionally compresses the merged PDF using Ghostscript\n6. **Chunking**: Optionally splits the PDF by pages or file size\n7. **Logging**: Records all processing steps and results\n\n## Data Structure\n\nThe data source extracts and stores data in the following JSON structure:\n\n### PDF File Record\n```json\n{\n  \"id\": \"pdf_a1b2c3d4e5f6\",\n  \"timestamp\": \"2024-01-01T12:00:00.000Z\",\n  \"source\": \"to_pdf\",\n  \"file_path\": \"/path/to/document.pdf\",\n  \"file_name\": \"document.pdf\",\n  \"file_size\": 1024000,\n  \"file_hash\": \"a1b2c3d4e5f6...\",\n  \"modified_time\": \"2024-01-01T10:00:00.000Z\",\n  \"is_valid\": true,\n  \"processed_at\": \"2024-01-01T12:00:01.000Z\",\n  \"processor\": \"SubjectiveToPdfDataSource\"\n}\n```\n\n### Processing Result Record\n```json\n{\n  \"id\": \"processing_2024-01-01T12:00:00.000Z\",\n  \"timestamp\": \"2024-01-01T12:00:00.000Z\",\n  \"source\": \"to_pdf\",\n  \"input_directory\": \"/path/to/input\",\n  \"output_file\": \"/path/to/output/merged.pdf\",\n  \"merge_success\": true,\n  \"compression_enabled\": true,\n  \"compression_success\": true,\n  \"chunk_config\": \"3\",\n  \"chunk_files\": [\"merged_part1.pdf\", \"merged_part2.pdf\", \"merged_part3.pdf\"],\n  \"total_input_pdfs\": 5,\n  \"processed_at\": \"2024-01-01T12:00:01.000Z\",\n  \"processor\": \"SubjectiveToPdfDataSource\"\n}\n```\n\n## Output Structure\n\nThe data source creates the following output structure:\n\n```\n./output/\n\u251c\u2500\u2500 merged.pdf                    # Merged PDF file\n\u251c\u2500\u2500 merged_part1.pdf             # Chunk files (if chunking enabled)\n\u251c\u2500\u2500 merged_part2.pdf\n\u251c\u2500\u2500 merged_part3.pdf\n\u2514\u2500\u2500 processing_log_20240101_120000.json  # Processing log\n```\n\n## Configuration Options\n\n### Chunk Configuration\n\n**By Pages:**\n- `\"3\"` - Split into 3 parts with equal pages\n- `\"10\"` - Split into 10 parts with equal pages\n\n**By File Size:**\n- `\"50MB\"` - Split into 50MB chunks\n- `\"1GB\"` - Split into 1GB chunks\n\n### Compression Settings\n\nThe data source uses Ghostscript with the following settings:\n- Compatibility Level: 1.4\n- PDF Settings: /ebook (optimized for e-books)\n- Timeout: 5 minutes per file\n\n## Development\n\n### Adding Custom Logic\n\n1. **PDF Processing**: Modify the `merge_pdfs()`, `compress_pdf()`, or chunking methods\n2. **Data Extraction**: Customize the `extract_data()` method for different PDF metadata\n3. **Configuration**: Add custom configuration parameters in the `datasource_config` section\n\n### Testing\n\n```bash\n# Create test directory with PDF files\nmkdir -p input\n# Copy some PDF files to input/\n\n# Run the data source\npython SubjectiveToPdfDataSource.py\n\n# Check output\nls -la output/\n```\n\n### Debug Mode\n\n```bash\n# Run with debug logging\nexport LOG_LEVEL=DEBUG\npython SubjectiveToPdfDataSource.py\n```\n\n## Troubleshooting\n\n### Common Issues\n\n1. **Ghostscript Not Found**: Install Ghostscript or disable compression\n2. **Permission Errors**: Ensure read/write permissions on input/output directories\n3. **Invalid PDFs**: Check for corrupted or empty PDF files\n4. **Memory Issues**: Use chunking for very large PDF collections\n\n### Logging\n\nThe data source provides comprehensive logging. Set the `LOG_LEVEL` environment variable:\n\n```bash\nexport LOG_LEVEL=DEBUG  # DEBUG, INFO, WARNING, ERROR\n```\n\n### Performance Tips\n\n1. **Large Collections**: Use chunking to process large PDF collections\n2. **Compression**: Enable compression for storage optimization\n3. **Deduplication**: The system automatically removes duplicates\n4. **Parallel Processing**: Consider running multiple instances for different directories\n\n## Contributing\n\n1. Fork the repository\n2. Create a feature branch\n3. Make your changes\n4. Add tests if applicable\n5. Submit a pull request\n\n## License\n\nThis project is part of Subjective Technologies and follows the organization's licensing terms.\n\n## Support\n\nFor support and questions:\n- Create an issue in the repository\n- Contact Subjective Technologies support\n- Check the documentation at [Subjective Technologies](https://github.com/Subjective-Technologies)\n\n---\n\nGenerated by Subjective CLI (subcli) v1.0.0\n"
     },
     {
       "name": "subjective_beeper_realtime_datasource",
@@ -242,7 +268,8 @@
       "class_name": "SubjectiveBeeperRealTimeDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# Subjective Beeper Real-Time Data Source\n\nA [SubjectiveRealTimeDataSource](https://github.com/Subjective-Technologies/subjective-abstract-data-source-package) implementation that monitors Beeper's local SQLite database for new messages across all connected networks (WhatsApp, Telegram, LinkedIn, etc.).\n\n## \ud83c\udfaf Overview\n\nThis data source bypasses Matrix bridge reliability issues by directly reading from Beeper's local message cache, providing real-time access to messages from all connected chat networks.\n\n## \u2728 Features\n\n- **\ud83d\udd0d Real-time Monitoring** - Detects new messages as they arrive in Beeper's database\n- **\ud83c\udf10 Multi-Network Support** - WhatsApp, Telegram, LinkedIn, Matrix, and more\n- **\ud83e\uddf5 Thread Organization** - Groups messages by conversation threads\n- **\ud83d\udc64 Sender Information** - Real display names and contact details\n- **\ud83d\udd10 Encryption Status** - Shows encrypted vs unencrypted messages\n- **\u21aa\ufe0f Reply Detection** - Identifies reply messages and conversation flow\n- **\ud83d\udcca Rich Metadata** - Full JSON access for advanced processing\n- **\u26a1 High Performance** - Direct database access for minimal latency\n\n## \ud83d\ude80 Quick Start\n\n### Prerequisites\n\n- Python 3.11+\n- Beeper desktop client installed\n- Access to Beeper's SQLite database\n\n### Installation\n\n```bash\n# Clone the repository\ngit clone https://github.com/Subjective-Technologies/subjective_beeper_realtime_datasource.git\ncd subjective_beeper_realtime_datasource\n\n# Install dependencies\nconda env create -f environment.yml\nconda activate subjective-beeper-realtime-datasource\n```\n\n### Configuration\n\nThe data source requires only one configuration field:\n\n```python\n{\n    \"name\": \"database_path\",\n    \"type\": \"string\",\n    \"label\": \"Beeper Database Path\",\n    \"default\": \"~/.config/BeeperTexts/index.db\",\n    \"required\": True\n}\n```\n\n### Usage\n\n```python\nfrom SubjectiveBeeperRealTimeDataSource import SubjectiveBeeperRealTimeDataSource\n\n# Create and configure the data source\nsource = SubjectiveBeeperRealTimeDataSource()\nsource._session = {\"database_path\": \"/path/to/beeper/database.db\"}\n\n# Test connection\nif source.test_connection():\n    print(\"\u2705 Database connection successful!\")\n    \n    # Start monitoring\n    await source.start()\n```\n\n## \ud83d\udccb Message Format\n\nEach message notification includes:\n\n```python\n{\n    \"room_id\": \"!roomID:beeper.local\",\n    \"thread_id\": \"!roomID:beeper.local\",  # Same as room_id for threading\n    \"thread_name\": \"WhatsApp: John Smith\",\n    \"sender_id\": \"@userID:network.local\",\n    \"sender_name\": \"John Smith\",\n    \"network\": \"whatsapp\",  # whatsapp, telegram, linkedin, matrix\n    \"text\": \"Hello world!\",\n    \"timestamp\": 1756687131000,\n    \"event_id\": \"$eventID:beeper.local\",\n    \"message_type\": \"TEXT\",  # TEXT, MEDIA, FILE, LOCATION, STICKER\n    \"is_sent_by_me\": False,\n    \"is_encrypted\": False,\n    \"is_reply\": False,\n    \"reply_to_id\": None,\n    \"human_time\": \"2025-08-31 21:38:51\",\n    \"raw_message_data\": {...},  # Full JSON message data\n    \"raw_sender_data\": {...}    # Full sender information\n}\n```\n\n## \ud83d\udd27 Advanced Features\n\n### Thread Management\n\n```python\n# Get all messages from a specific thread\nmessages = source.get_thread_messages(\"!roomID:beeper.local\", limit=50)\n```\n\n### Network Detection\n\nThe data source automatically detects the network type:\n- **WhatsApp** \ud83d\udcf1 - `whatsapp`\n- **Telegram** \u2708\ufe0f - `telegram`\n- **LinkedIn** \ud83d\udcbc - `linkedin`\n- **Matrix** \ud83d\udd17 - `matrix`\n\n### Message Types\n\nSupports multiple message types:\n- **TEXT** - Regular text messages\n- **MEDIA** - Images, videos, audio\n- **FILE** - Document attachments\n- **LOCATION** - Location sharing\n- **STICKER** - Stickers and GIFs\n\n## \ud83c\udfd7\ufe0f Architecture\n\nThis data source works by:\n\n1. **Direct Database Access** - Reads from Beeper's SQLite database\n2. **Real-time Polling** - Checks for new messages every second\n3. **Metadata Enrichment** - Joins with user and account tables\n4. **Framework Integration** - Uses SubjectiveRealTimeDataSource base class\n5. **Notification System** - Sends real-time updates to subscribers\n\n## \ud83d\udd0d Database Schema\n\nThe data source queries these tables:\n- `mx_room_messages` - Main message storage\n- `users` - User/contact information\n- `accounts` - Network/platform details\n\n## \ud83d\udee0\ufe0f Development\n\n### Testing\n\n```bash\n# Run standalone test\npython SubjectiveBeeperRealTimeDataSource.py\n\n# Test connection only\npython -c \"\nfrom SubjectiveBeeperRealTimeDataSource import SubjectiveBeeperRealTimeDataSource\nsource = SubjectiveBeeperRealTimeDataSource()\nprint('Connection:', source.test_connection())\n\"\n```\n\n### Environment Setup\n\n```bash\n# Create development environment\nconda env create -f environment.yml\nconda activate subjective-beeper-realtime-datasource\n\n# Install development dependencies\npip install -r requirements-dev.txt\n```\n\n## \ud83d\udce6 Dependencies\n\n- `subjective-abstract-data-source-package` - Base data source framework\n- `brainboost-data-tools-logger-package` - Logging utilities\n- `sqlite3` - Database access (built-in)\n\n## \ud83e\udd1d Contributing\n\n1. Fork the repository\n2. Create a feature branch\n3. Make your changes\n4. Add tests if applicable\n5. Submit a pull request\n\n## \ud83d\udcc4 License\n\nThis project is part of the [Subjective Technologies](https://www.subjectivetechnologies.com) ecosystem.\n\n## \ud83d\udd17 Related Projects\n\n- [Subjective Abstract Data Source Package](https://github.com/Subjective-Technologies/subjective-abstract-data-source-package)\n- [BrainBoost Data Tools Logger Package](https://github.com/Subjective-Technologies/brainboost-data-tools-logger-package)\n- [Subjective Technologies](https://github.com/orgs/Subjective-Technologies/)\n\n## \ud83d\udcde Support\n\nFor support and questions:\n- Email: subjectivetechnologies@gmail.com\n- Website: https://www.subjectivetechnologies.com\n- GitHub: https://github.com/orgs/Subjective-Technologies/\n"
     },
     {
       "name": "subjective_pdftotext_datasource",
@@ -251,241 +278,268 @@
       "class_name": "SubjectivePdfToTextDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectivePdfToTextDataSource\n\nBatch data source for converting PDF documents to JSON context files - Part of Subjective Technologies Data Source ecosystem.\n\n## Overview\n\nThis data source converts PDF documents into JSON format with structured metadata and extracted text content. The JSON structure includes metadata as the first node with the data type name \"from_pdf\", timestamp, and comprehensive PDF information.\n\n## Features\n\n- \ud83d\udcc4 **PDF Text Extraction**: Extracts text from all pages of a PDF document\n- \ud83d\udcca **Structured JSON Output**: Creates well-structured JSON with metadata and content\n- \ud83c\udff7\ufe0f **Metadata First**: Metadata node is the first element with data_type \"from_pdf\"\n- \u23f0 **Timestamp Tracking**: Includes extraction timestamp and PDF modification time\n- \ud83d\udcdd **Page-Level Extraction**: Extracts text with optional page number markers\n- \ud83d\udd0d **File Validation**: Validates PDF files before processing\n- \ud83d\udcbe **Automatic Output**: Generates output JSON file automatically\n- \ud83d\udee1\ufe0f **Error Handling**: Robust error handling for corrupted or invalid PDFs\n- \ud83d\udcc8 **Progress Tracking**: Real-time progress updates during extraction\n\n## Installation\n\n### Using Pip\n\n```bash\n# Create virtual environment\npython -m venv venv\nsource venv/bin/activate  # On Windows: venv\\Scripts\\activate\n\n# Install dependencies\npip install -r requirements.txt\n```\n\n## Configuration\n\nCreate a `.env` file in the project root with the following variables:\n\n```env\n# PDF Configuration\nPDF_FILE_PATH=./path/to/document.pdf\nOUTPUT_FILE_PATH=./output/document.json  # Optional, defaults to PDF name with .json extension\nINCLUDE_PAGE_NUMBERS=true  # Whether to include page numbers in text\n```\n\n## Usage\n\n### Direct Execution\n\n```bash\npython SubjectivePdfToTextDataSource.py\n```\n\n### Programmatic Usage\n\n```python\nfrom SubjectivePdfToTextDataSource import SubjectivePdfToTextDataSource\n\n# Configuration\nparams = {\n    'pdf_file_path': './path/to/document.pdf',\n    'output_file_path': './output/document.json',  # Optional\n    'include_page_numbers': True  # Optional, default: True\n}\n\n# Create and run data source\ndatasource = SubjectivePdfToTextDataSource(params=params)\n\n# Convert PDF to JSON\nresults = datasource.fetch()\n\n# Access the JSON structure\nif results:\n    json_data = results[0]\n    metadata = json_data['metadata']\n    content = json_data['content']\n    \n    print(f\"Data Type: {metadata['data_type']}\")\n    print(f\"Name: {metadata['name']}\")\n    print(f\"Timestamp: {metadata['timestamp']}\")\n    print(f\"Total Pages: {metadata['total_pages']}\")\n    print(f\"Full Text Length: {len(content['full_text'])} characters\")\n```\n\n### Using subcli\n\n```bash\n# Execute with interactive parameter collection\nsubcli --execute-data-source=pdftotext --collect-metadata\n```\n\n## JSON Structure\n\nThe data source creates JSON files with the following structure:\n\n```json\n{\n  \"metadata\": {\n    \"name\": \"document\",\n    \"data_type\": \"from_pdf\",\n    \"timestamp\": \"2024-01-01T12:00:00.000000\",\n    \"pdf_file_name\": \"document.pdf\",\n    \"pdf_file_path\": \"/absolute/path/to/document.pdf\",\n    \"pdf_file_size\": 1024000,\n    \"pdf_file_hash\": \"a1b2c3d4e5f6...\",\n    \"pdf_modified_time\": \"2024-01-01T10:00:00.000000\",\n    \"total_pages\": 10,\n    \"total_characters\": 50000,\n    \"pages_with_text\": 10,\n    \"extraction_timestamp\": \"2024-01-01T12:00:00.000000\"\n  },\n  \"content\": {\n    \"full_text\": \"--- Page 1 ---\\nExtracted text from page 1...\\n\\n--- Page 2 ---\\n...\",\n    \"pages\": [\n      {\n        \"page_number\": 1,\n        \"text\": \"Extracted text from page 1...\",\n        \"character_count\": 2500\n      },\n      {\n        \"page_number\": 2,\n        \"text\": \"Extracted text from page 2...\",\n        \"character_count\": 2300\n      }\n    ]\n  }\n}\n```\n\n## Output Structure\n\nThe data source creates the following output:\n\n```\n./output/\n\u2514\u2500\u2500 document.json  # JSON file with metadata and extracted content\n```\n\n## Configuration Options\n\n### Required Parameters\n\n- **pdf_file_path** (required): Path to the PDF file to convert\n\n### Optional Parameters\n\n- **output_file_path** (optional): Path for output JSON file. If not provided, defaults to the PDF file name with `.json` extension in the same directory\n- **include_page_numbers** (optional): Whether to include page number markers in the full text (default: true)\n\n### Processing Behavior\n\n- **Text Extraction**: Uses PyPDF2 for reliable text extraction\n- **Page Processing**: Processes all pages sequentially\n- **Error Handling**: Skips invalid or corrupted pages, continues processing\n- **Progress Tracking**: Shows real-time progress during extraction\n- **File Validation**: Validates PDF file before processing\n\n## Development\n\n### Adding Custom Logic\n\n1. **Text Processing**: Modify the `extract_text_from_pdf()` method for custom text processing\n2. **Metadata**: Customize metadata fields in the `create_json_structure()` method\n3. **Output Format**: Modify the JSON structure in `create_json_structure()` method\n\n### Testing\n\n```bash\n# Create test PDF file or use existing one\n# Run the data source\npython SubjectivePdfToTextDataSource.py\n\n# Check output\ncat output/document.json\n```\n\n### Debug Mode\n\n```bash\n# Run with debug logging\nexport LOG_LEVEL=DEBUG\npython SubjectivePdfToTextDataSource.py\n```\n\n## Troubleshooting\n\n### Common Issues\n\n1. **No Text Extracted**: Some PDFs may be image-based and not contain extractable text\n2. **Invalid PDFs**: Check for corrupted or empty PDF files\n3. **Permission Errors**: Ensure read permissions on the PDF file and write permissions on the output directory\n4. **Memory Issues**: Very large PDFs may require more memory\n\n### Performance Tips\n\n1. **Large PDFs**: The system processes pages sequentially for memory efficiency\n2. **Batch Processing**: Process multiple PDFs by calling the data source multiple times\n3. **Output Location**: Use fast storage for output files\n\n### Logging\n\nThe data source provides comprehensive logging. Set the `LOG_LEVEL` environment variable:\n\n```bash\nexport LOG_LEVEL=DEBUG  # DEBUG, INFO, WARNING, ERROR\n```\n\n## Example Output\n\nAfter processing a PDF, you'll get a JSON file like:\n\n```json\n{\n  \"metadata\": {\n    \"name\": \"research_paper\",\n    \"data_type\": \"from_pdf\",\n    \"timestamp\": \"2024-01-15T14:30:00.123456\",\n    \"pdf_file_name\": \"research_paper.pdf\",\n    \"pdf_file_path\": \"/home/user/documents/research_paper.pdf\",\n    \"pdf_file_size\": 2048576,\n    \"pdf_file_hash\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n    \"pdf_modified_time\": \"2024-01-10T09:15:00.000000\",\n    \"total_pages\": 25,\n    \"total_characters\": 125000,\n    \"pages_with_text\": 25,\n    \"extraction_timestamp\": \"2024-01-15T14:30:00.123456\"\n  },\n  \"content\": {\n    \"full_text\": \"--- Page 1 ---\\nAbstract\\nThis paper presents...\\n\\n--- Page 2 ---\\nIntroduction\\n...\",\n    \"pages\": [...]\n  }\n}\n```\n\n## Contributing\n\n1. Fork the repository\n2. Create a feature branch\n3. Make your changes\n4. Add tests if applicable\n5. Submit a pull request\n\n## License\n\nThis project is part of Subjective Technologies and follows the organization's licensing terms.\n\n## Support\n\nFor support and questions:\n- Create an issue in the repository\n- Contact Subjective Technologies support\n- Check the documentation at [Subjective Technologies](https://github.com/Subjective-Technologies)\n\n---\n\nGenerated by Subjective CLI (subcli) v1.0.0\n\n"
     },
     {
       "name": "SubjectiveArimaRealtimeDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveArimaRealtimeDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveArimaRealtimeDataSource",
       "class_name": "SubjectiveArimaRealtimeDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveArimaRealtimeDataSource\n\nSubjective datasource implementation for SubjectiveArimaRealtimeDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveArimaRealtimeDataSource import SubjectiveArimaRealtimeDataSource\n\nsource = SubjectiveArimaRealtimeDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveAverageSequenceDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveAverageSequenceDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveAverageSequenceDataSource",
       "class_name": "SubjectiveAverageSequenceDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveAverageSequenceDataSource\n\nSubjective datasource implementation for SubjectiveAverageSequenceDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveAverageSequenceDataSource import SubjectiveAverageSequenceDataSource\n\nsource = SubjectiveAverageSequenceDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveBinanceP2PDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveBinanceP2PDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveBinanceP2PDataSource",
       "class_name": "SubjectiveBinanceP2PDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveBinanceP2PDataSource\n\nSubjective datasource implementation for SubjectiveBinanceP2PDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveBinanceP2PDataSource import SubjectiveBinanceP2PDataSource\n\nsource = SubjectiveBinanceP2PDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveBrokerRealtimeDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveBrokerRealtimeDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveBrokerRealtimeDataSource",
       "class_name": "SubjectiveBrokerRealtimeDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveBrokerRealtimeDataSource\n\nSubjective datasource implementation for SubjectiveBrokerRealtimeDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveBrokerRealtimeDataSource import SubjectiveBrokerRealtimeDataSource\n\nsource = SubjectiveBrokerRealtimeDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveExchangeMarketDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveExchangeMarketDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveExchangeMarketDataSource",
       "class_name": "SubjectiveExchangeMarketDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveExchangeMarketDataSource\n\nSubjective datasource implementation for SubjectiveExchangeMarketDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveExchangeMarketDataSource import SubjectiveExchangeMarketDataSource\n\nsource = SubjectiveExchangeMarketDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveGptTradingRobotDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveGptTradingRobotDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveGptTradingRobotDataSource",
       "class_name": "SubjectiveGptTradingRobotDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveGptTradingRobotDataSource\n\nSubjective datasource implementation for SubjectiveGptTradingRobotDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveGptTradingRobotDataSource import SubjectiveGptTradingRobotDataSource\n\nsource = SubjectiveGptTradingRobotDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveLastMinuteSymbolStreamDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveLastMinuteSymbolStreamDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveLastMinuteSymbolStreamDataSource",
       "class_name": "SubjectiveLastMinuteSymbolStreamDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveLastMinuteSymbolStreamDataSource\n\nSubjective datasource implementation for SubjectiveLastMinuteSymbolStreamDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveLastMinuteSymbolStreamDataSource import SubjectiveLastMinuteSymbolStreamDataSource\n\nsource = SubjectiveLastMinuteSymbolStreamDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveMonitorAllSymbolsRealtimeDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveMonitorAllSymbolsRealtimeDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveMonitorAllSymbolsRealtimeDataSource",
       "class_name": "SubjectiveMonitorAllSymbolsRealtimeDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveMonitorAllSymbolsRealtimeDataSource\n\nSubjective datasource implementation for SubjectiveMonitorAllSymbolsRealtimeDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveMonitorAllSymbolsRealtimeDataSource import SubjectiveMonitorAllSymbolsRealtimeDataSource\n\nsource = SubjectiveMonitorAllSymbolsRealtimeDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveMonitorSpecificSymbolsRealtimeDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveMonitorSpecificSymbolsRealtimeDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveMonitorSpecificSymbolsRealtimeDataSource",
       "class_name": "SubjectiveMonitorSpecificSymbolsRealtimeDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveMonitorSpecificSymbolsRealtimeDataSource\n\nSubjective datasource implementation for SubjectiveMonitorSpecificSymbolsRealtimeDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveMonitorSpecificSymbolsRealtimeDataSource import SubjectiveMonitorSpecificSymbolsRealtimeDataSource\n\nsource = SubjectiveMonitorSpecificSymbolsRealtimeDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveNewSymbolDetectionDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveNewSymbolDetectionDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveNewSymbolDetectionDataSource",
       "class_name": "SubjectiveNewSymbolDetectionDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveNewSymbolDetectionDataSource\n\nSubjective datasource implementation for SubjectiveNewSymbolDetectionDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveNewSymbolDetectionDataSource import SubjectiveNewSymbolDetectionDataSource\n\nsource = SubjectiveNewSymbolDetectionDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveOpsTelemetryDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveOpsTelemetryDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveOpsTelemetryDataSource",
       "class_name": "SubjectiveOpsTelemetryDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveOpsTelemetryDataSource\n\nSubjective datasource implementation for SubjectiveOpsTelemetryDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveOpsTelemetryDataSource import SubjectiveOpsTelemetryDataSource\n\nsource = SubjectiveOpsTelemetryDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveOrderEventsDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveOrderEventsDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveOrderEventsDataSource",
       "class_name": "SubjectiveOrderEventsDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveOrderEventsDataSource\n\nSubjective datasource implementation for SubjectiveOrderEventsDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveOrderEventsDataSource import SubjectiveOrderEventsDataSource\n\nsource = SubjectiveOrderEventsDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectivePerformanceBacktestingDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectivePerformanceBacktestingDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectivePerformanceBacktestingDataSource",
       "class_name": "SubjectivePerformanceBacktestingDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectivePerformanceBacktestingDataSource\n\nSubjective datasource implementation for SubjectivePerformanceBacktestingDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectivePerformanceBacktestingDataSource import SubjectivePerformanceBacktestingDataSource\n\nsource = SubjectivePerformanceBacktestingDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectivePerformanceMetricsDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectivePerformanceMetricsDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectivePerformanceMetricsDataSource",
       "class_name": "SubjectivePerformanceMetricsDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectivePerformanceMetricsDataSource\n\nSubjective datasource implementation for SubjectivePerformanceMetricsDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectivePerformanceMetricsDataSource import SubjectivePerformanceMetricsDataSource\n\nsource = SubjectivePerformanceMetricsDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectivePortfolioEventsDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectivePortfolioEventsDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectivePortfolioEventsDataSource",
       "class_name": "SubjectivePortfolioEventsDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectivePortfolioEventsDataSource\n\nSubjective datasource implementation for SubjectivePortfolioEventsDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectivePortfolioEventsDataSource import SubjectivePortfolioEventsDataSource\n\nsource = SubjectivePortfolioEventsDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectivePrioritySymbolMonitorDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectivePrioritySymbolMonitorDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectivePrioritySymbolMonitorDataSource",
       "class_name": "SubjectivePrioritySymbolMonitorDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectivePrioritySymbolMonitorDataSource\n\nSubjective datasource implementation for SubjectivePrioritySymbolMonitorDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectivePrioritySymbolMonitorDataSource import SubjectivePrioritySymbolMonitorDataSource\n\nsource = SubjectivePrioritySymbolMonitorDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectivePublicMarketDataImportDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectivePublicMarketDataImportDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectivePublicMarketDataImportDataSource",
       "class_name": "SubjectivePublicMarketDataImportDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectivePublicMarketDataImportDataSource\n\nSubjective datasource implementation for SubjectivePublicMarketDataImportDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectivePublicMarketDataImportDataSource import SubjectivePublicMarketDataImportDataSource\n\nsource = SubjectivePublicMarketDataImportDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveRealtimeTickerStreamAllSymbolsDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveRealtimeTickerStreamAllSymbolsDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveRealtimeTickerStreamAllSymbolsDataSource",
       "class_name": "SubjectiveRealtimeTickerStreamAllSymbolsDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveRealtimeTickerStreamAllSymbolsDataSource\n\nSubjective datasource implementation for SubjectiveRealtimeTickerStreamAllSymbolsDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveRealtimeTickerStreamAllSymbolsDataSource import SubjectiveRealtimeTickerStreamAllSymbolsDataSource\n\nsource = SubjectiveRealtimeTickerStreamAllSymbolsDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveRealtimeTickerStreamMultipleSymbolsDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveRealtimeTickerStreamMultipleSymbolsDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveRealtimeTickerStreamMultipleSymbolsDataSource",
       "class_name": "SubjectiveRealtimeTickerStreamMultipleSymbolsDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveRealtimeTickerStreamMultipleSymbolsDataSource\n\nSubjective datasource implementation for SubjectiveRealtimeTickerStreamMultipleSymbolsDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveRealtimeTickerStreamMultipleSymbolsDataSource import SubjectiveRealtimeTickerStreamMultipleSymbolsDataSource\n\nsource = SubjectiveRealtimeTickerStreamMultipleSymbolsDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveRealtimeTickerStreamSingleSymbolDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveRealtimeTickerStreamSingleSymbolDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveRealtimeTickerStreamSingleSymbolDataSource",
       "class_name": "SubjectiveRealtimeTickerStreamSingleSymbolDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveRealtimeTickerStreamSingleSymbolDataSource\n\nSubjective datasource implementation for SubjectiveRealtimeTickerStreamSingleSymbolDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveRealtimeTickerStreamSingleSymbolDataSource import SubjectiveRealtimeTickerStreamSingleSymbolDataSource\n\nsource = SubjectiveRealtimeTickerStreamSingleSymbolDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveSignalsOutputDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveSignalsOutputDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveSignalsOutputDataSource",
       "class_name": "SubjectiveSignalsOutputDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveSignalsOutputDataSource\n\nSubjective datasource implementation for SubjectiveSignalsOutputDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveSignalsOutputDataSource import SubjectiveSignalsOutputDataSource\n\nsource = SubjectiveSignalsOutputDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveSimulatorOutputsDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveSimulatorOutputsDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveSimulatorOutputsDataSource",
       "class_name": "SubjectiveSimulatorOutputsDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveSimulatorOutputsDataSource\n\nSubjective datasource implementation for SubjectiveSimulatorOutputsDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveSimulatorOutputsDataSource import SubjectiveSimulatorOutputsDataSource\n\nsource = SubjectiveSimulatorOutputsDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveSymbolMonitorSequenceDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveSymbolMonitorSequenceDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveSymbolMonitorSequenceDataSource",
       "class_name": "SubjectiveSymbolMonitorSequenceDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveSymbolMonitorSequenceDataSource\n\nSubjective datasource implementation for SubjectiveSymbolMonitorSequenceDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveSymbolMonitorSequenceDataSource import SubjectiveSymbolMonitorSequenceDataSource\n\nsource = SubjectiveSymbolMonitorSequenceDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveTelegramSignalsDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveTelegramSignalsDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveTelegramSignalsDataSource",
       "class_name": "SubjectiveTelegramSignalsDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveTelegramSignalsDataSource\n\nSubjective datasource implementation for SubjectiveTelegramSignalsDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveTelegramSignalsDataSource import SubjectiveTelegramSignalsDataSource\n\nsource = SubjectiveTelegramSignalsDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveTradingViewRealtimeDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveTradingViewRealtimeDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveTradingViewRealtimeDataSource",
       "class_name": "SubjectiveTradingViewRealtimeDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveTradingViewRealtimeDataSource\n\nSubjective datasource implementation for SubjectiveTradingViewRealtimeDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveTradingViewRealtimeDataSource import SubjectiveTradingViewRealtimeDataSource\n\nsource = SubjectiveTradingViewRealtimeDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     },
     {
       "name": "SubjectiveTwitterOnDemandDataSource",
-      "description": "",
+      "description": "Subjective datasource implementation for SubjectiveTwitterOnDemandDataSource.",
       "repository_url": "https://github.com/Subjective-Technologies/SubjectiveTwitterOnDemandDataSource",
       "class_name": "SubjectiveTwitterOnDemandDataSource",
       "icon_svg": "",
       "installed": false,
-      "rating": 0
+      "rating": 0,
+      "readme_content": "# SubjectiveTwitterOnDemandDataSource\n\nSubjective datasource implementation for SubjectiveTwitterOnDemandDataSource.\n\n## Usage\n\n```python\nfrom subjective_datasources.SubjectiveTwitterOnDemandDataSource import SubjectiveTwitterOnDemandDataSource\n\nsource = SubjectiveTwitterOnDemandDataSource(params={})\nsource.fetch()\n```\n\n## Parameters\n\nUse the params dictionary when constructing the datasource to provide connection and runtime values.\nRefer to get_connection_data() for required fields.\n"
     }
   ]
 }
